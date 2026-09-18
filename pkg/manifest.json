@@ -1,6 +1,6 @@
 {
   "name": "Valheim1CompatBridges",
-  "version_number": "1.1.0",
+  "version_number": "1.2.0",
   "website_url": "https://github.com/PawelSzymanski89/Valheim1CompatBridges",
   "description": "BepInEx preloader that adds old API signatures back to Valheim 1.0 so pre-1.0 mods (Weedheim, WeedheimShip, Marketplace And Server NPCs) load again. Includes a script for Marketplace two remaining IL fixes.",
   "dependencies": [

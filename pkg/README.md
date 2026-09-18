@@ -13,6 +13,13 @@ Tested with (client + dedicated server, BepInEx 5.4.2350):
 | MagicMike-WeedheimShip 1.0.2 | loads and works |
 | KGvalheim-Marketplace_And_Server_NPCs_Revamped 9.8.1 | loads and works, with `fix-kg-marketplace.ps1` applied once (see below); NPC map **right-click** (fashion) has no equivalent in 1.0 and does nothing; transmog icons in the inventory grid are not refreshed |
 
+## Coverage, measured
+
+Checked against the newest versions of a 69-mod pack: 35 of them have a 1.0 update of their own (install those
+instead), and of the 34 with no update, 14 were already clean while **20 load thanks to these bridges, with none
+left failing** the static check. That check (`tools/apicheck.ps1` in the repo) only covers missing/renamed API,
+though - it cannot see a mod's own hardcoded IL, so it is not a substitute for launching the game.
+
 ## Install
 
 Put the `patchers/Valheim1CompatBridges` folder into `BepInEx/patchers/` on the client **and** on the

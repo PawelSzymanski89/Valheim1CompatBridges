@@ -51,6 +51,8 @@ namespace Valheim1CompatBridges
             Fwd(m, "Inventory", "IsTeleportable", A(), S(F));
             Fwd(m, "Humanoid", "IsTeleportable", A(), S(F));
             Fwd(m, "Inventory", "AddItem", A("System.String", "System.Int32", "System.Single", "Vector2i", "System.Boolean", "System.Int32", "System.Int32", "System.Int64", "System.String", "System.Collections.Generic.Dictionary`2<System.String,System.String>", "System.Int32", "System.Boolean"), S(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, F, F));
+            // AddItem(ItemData, amount, x, y) dostalo piaty parametr skipValidPositionCheck (domyslnie false)
+            Fwd(m, "Inventory", "AddItem", A("ItemDrop/ItemData", "System.Int32", "System.Int32", "System.Int32"), S(0, 1, 2, 3, F));
             Fwd(m, "Terminal/ConsoleCommand", ".ctor", A("System.String", "System.String", "Terminal/ConsoleEvent", "System.Boolean", "System.Boolean", "System.Boolean", "System.Boolean", "System.Boolean", "Terminal/ConsoleOptionsFetcher", "System.Boolean", "System.Boolean", "System.Boolean"), S(0, 1, 2, 3, 4, 5, 6, 7, F, 8, 9, 10, 11));
             Fwd(m, "Terminal/ConsoleEventArgs", ".ctor", A("System.String", "Terminal"), S(0, 1, D));
             Fwd(m, "YesNoPopup", ".ctor", A("System.String", "System.String", "PopupButtonCallback", "PopupButtonCallback", "System.Boolean"), S(0, 1, 2, 3, 4, F));
@@ -66,6 +68,9 @@ namespace Valheim1CompatBridges
             Fwd(m, "VisEquipment", "SetLeftItem", A("System.String", "System.Int32"), S(0, 1, D));
             Fwd(m, "VisEquipment", "SetLeftBackItem", A("System.String", "System.Int32"), S(0, 1, D));
             Fwd(m, "VisEquipment", "SetShoulderItem", A("System.String", "System.Int32"), S(0, 1, D));
+            Fwd(m, "VisEquipment", "SetUtilityItem", A("System.String"), S(0));
+            // AttachArmor dostalo trzeci parametr quality (domyslnie 0) - D daje wlasnie 0
+            Fwd(m, "VisEquipment", "AttachArmor", A("System.Int32", "System.Int32"), S(0, 1, D));
 
             Log.LogInfo($"Gotowe: {_added} mostkow/wstrzykniec w assembly_valheim.dll.");
         }

@@ -35,6 +35,20 @@ Verified to coexist with AzuExtendedPlayerInventory 2.4.14, AzuAutoStore 3.1.4, 
 CurrencyPocket 1.0.13, Unshamed 1.0.5, MyDirtyHoe 2.0.3, MassFarming 1.13.0, Jotunn 2.30.0 and eight
 older community mods — 21 plugins loading together.
 
+### Coverage, measured
+
+Checked against the **newest** versions of a 69-mod pack. 35 of those mods have had a 1.0 update of their own -
+install those, no bridge needed. Of the remaining **34 with no 1.0 update: 14 are already clean and 20 load
+thanks to these bridges. None are left with a gap.**
+
+`tools/apicheck.ps1 <mod.dll>` is the tool that produced those numbers: it statically resolves every
+call, field read and `[HarmonyPatch]` in a mod against your `assembly_valheim.dll`, so it reports what would
+throw `MissingMethodException` before the game starts.
+
+**A clean scan is not proof the mod works.** It only covers that one class of breakage. It cannot see a mod's
+own hardcoded IL - Marketplace scanned clean and still threw `InvalidProgramException`, because its transpiler
+had a local variable slot number baked in (see below). Nothing replaces launching the game.
+
 Known gaps, both cosmetic and both in Marketplace: right-clicking an NPC on the map ("fashion") has no
 1.0 equivalent and does nothing, and transmog icons in the inventory grid are not refreshed.
 
@@ -74,6 +88,9 @@ DLL; re-run it after every Marketplace update.
 - `InventoryGrid.Awake()` (invoked from `OnEnable`), `Minimap.OnMapRightClick()` stub,
   `Hoverable.GetHoverOffset()` default interface implementation (without it, classes in old mods fail
   `TypeLoadException: VTable setup failed`).
+- `VisEquipment.SetUtilityItem(string)`, `VisEquipment.AttachArmor(int, int)` and
+  `Inventory.AddItem(ItemData, int, int, int)` - the first takes an item hash in 1.0, the other two gained a
+  parameter (`quality`, `skipValidPositionCheck`).
 - Old overloads of `Character.Message`, `MessageHud.ShowMessage`, `EffectList.Create`,
   `SEMan.AddStatusEffect` (×2), `ItemData.GetTooltip`, `Inventory.IsTeleportable`, `Humanoid.IsTeleportable`,
   `Inventory.AddItem` (12 params), `Terminal.ConsoleCommand` ctor (12 params), `Terminal.ConsoleEventArgs`
