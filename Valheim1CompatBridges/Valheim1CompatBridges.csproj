@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>Valheim1CompatBridges</AssemblyName>
+    <RootNamespace>Valheim1CompatBridges</RootNamespace>
+    <LangVersion>latest</LangVersion>
+    <Nullable>disable</Nullable>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <Configuration>Release</Configuration>
+    <!-- nadpisz: dotnet build -c Release -p:BepInExCore="<sciezka do gry>/BepInEx/core" -->
+    <BepInExCore Condition="'$(BepInExCore)' == ''">$(HOME)/Library/Application Support/Steam/steamapps/common/Valheim/BepInEx/core</BepInExCore>
+    <BepInExCore Condition="'$(BepInExCore)' == '' AND '$(OS)' == 'Windows_NT'">C:/Program Files (x86)/Steam/steamapps/common/Valheim/BepInEx/core</BepInExCore>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Mono.Cecil"><HintPath>$(BepInExCore)/Mono.Cecil.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="BepInEx"><HintPath>$(BepInExCore)/BepInEx.dll</HintPath><Private>false</Private></Reference>
+  </ItemGroup>
+</Project>
